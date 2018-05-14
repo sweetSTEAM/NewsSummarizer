@@ -26,7 +26,6 @@ class Lenta(BaseParser):
         news_date = self._str_to_time(
             self._time_to_str(self.curr_date) + ' '
             + news.find('span', 'time').text)
-        print('DEBUG ' + str(news_date))
         return news_url, news_date
 
     def _page_url(self):
@@ -35,7 +34,7 @@ class Lenta(BaseParser):
 
     def _next_page_url(self):
         self._d_counter += 1
-        self.curr_date = int(datetieme.datetime.now().timestamp() - datetime.timedelta(days=self._d_counter).total_seconds())
+        self.curr_date = int(datetime.datetime.now().timestamp() - datetime.timedelta(days=self._d_counter).total_seconds())
         return self._page_url()
 
     def _parse_news(self, news_params):
