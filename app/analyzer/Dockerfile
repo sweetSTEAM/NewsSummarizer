@@ -10,7 +10,7 @@ RUN pip3 install --upgrade pip
 
 RUN mkdir app
 WORKDIR /app
-COPY news_analyser.py ./
+COPY news_analyzer.py ./
 COPY nlp ./
 COPY requirements.txt ./
 
