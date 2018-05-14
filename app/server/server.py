@@ -80,6 +80,7 @@ def update_events():
 
 if __name__ == "__main__":
     global events
+    events = []
     thread = Thread(target=update_events)
     thread.start()
     logger.info('started')
