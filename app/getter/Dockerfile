@@ -13,3 +13,4 @@ RUN mkdir app
 WORKDIR /app
 COPY news_getter.py ./
 COPY parsers ./
+CMD ["python3", "news_getter.py"]

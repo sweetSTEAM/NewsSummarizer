@@ -13,5 +13,5 @@ RUN mkdir app
 WORKDIR /app
 COPY server.py ./
 COPY frontend ./
-
+CMD ["python3", "server.py"]
 EXPOSE 80

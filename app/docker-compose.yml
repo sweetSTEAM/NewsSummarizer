@@ -10,7 +10,6 @@ services:
 
   server:
     build: server
-    command: python3 server.py
     ports:
      - "80:80"
     volumes:
@@ -27,7 +26,6 @@ services:
 
   getter:
     build: getter
-    command: python3 news_getter.py
     environment:
      - GETTER_UPDATE_RATE=600
      - HOURS_INIT=12
@@ -40,7 +38,6 @@ services:
 
   analyzer:
     build: analyzer
-    command: python3 news_analyzer.py
     environment:
      - ANALYZER_UPDATE_RATE=600
      - ANALYZER_BOOTSTRAP_WAIT=90
