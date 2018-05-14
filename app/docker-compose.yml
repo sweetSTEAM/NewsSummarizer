@@ -17,8 +17,8 @@ services:
     environment:
      - PORT=80
      - OFFSET=5
-     - SERVER_UPDATE_RATE=300
-     - SERVER_BOOTSTRAP_WAIT=100
+     - SERVER_UPDATE_RATE=200
+     - SERVER_BOOTSTRAP_WAIT=150
     networks:
      - db_net
     links:
