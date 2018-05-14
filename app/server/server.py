@@ -34,8 +34,6 @@ db_client = MongoClient(
     27017)
 db = db_client.news
 
-events = None
-
 @app.route('/')
 def index():
     return redirect(
