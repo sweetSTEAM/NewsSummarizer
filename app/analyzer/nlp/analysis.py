@@ -4,7 +4,7 @@ import pickle
 import datetime
 from .normalization import TEXT_PIPELINE
 from . import sum_basic, divrank
-from sklearn.cluster import KMeans, MiniBatchKMeans
+from sklearn.cluster import KMeans
 import time
 import numpy as np
 import pytz
@@ -20,7 +20,7 @@ class Analyzer():
     def __init__(self, config={
             'kmeans': {
                 'proximity_coeff': 0.6, 'n_clusters_coeff': 4,
-                'batch_size': 200, 'n_init': 10, 'max_iter': 300
+                'n_jobs': 8, 'n_init': 10, 'max_iter': 300
             },
             'append_titles': True,
             'svm_path': 'nlp/models/SVM_classifier.bin',
@@ -110,9 +110,9 @@ class Analyzer():
     def _clusterize(self):
         config = self.config['kmeans']
         tfidf_matrix = self._data['tfidf_vector'].tolist()
-        kmeans = MiniBatchKMeans(
+        kmeans = KMeans(
             n_clusters=self._count // config['n_clusters_coeff'],
-            batch_size=config['batch_size'],
+            n_jobs=config['n_jobs'],
             n_init=config['n_init'],
             max_iter=config['max_iter']
         ).fit(tfidf_matrix)
