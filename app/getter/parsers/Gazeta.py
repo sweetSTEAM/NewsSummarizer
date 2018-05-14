@@ -58,8 +58,8 @@ class Gazeta(BaseParser):
         return datetime.datetime.utcfromtimestamp(time).replace(
             tzinfo=pytz.utc).astimezone(self.TZ).strftime('%d.%m.%Y_%H:%M')
 
-    def _get_content(self, url, session=None, type_='html'):
-        response = self._request(url, session)
+    def _get_content(self, url, type_='html'):
+        response = self._request(url)
         if type_ == 'html':
             return BeautifulSoup(response.text.encode('cp1251'), 'lxml')
         elif type_ == 'json':
