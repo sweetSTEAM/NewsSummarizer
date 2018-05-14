@@ -42,7 +42,7 @@ def index():
 
 @app.route('/<int:topic_count>')
 def get_content(topic_count=5):
-    events = db.events.find({})
+    events = list(db.events.find({}))
     if len(events) < topic_count:
         return redirect(
             url_for('get_content', topic_count=len(events)))
@@ -53,7 +53,7 @@ def get_content(topic_count=5):
 
 @app.route('/api/<int:offset>')
 def api_get_content(offset=app.config['OFFSET']):
-    events = db.events.find({})
+    events = list(db.events.find({}))
     if offset >= len(events):
         response = jsonify(message="Topic number too large")
         response.status_code = 404
@@ -70,8 +70,7 @@ def reverse_filter(s):
 
 
 if __name__ == "__main__":
-    while not db.events.count():
-        logger.info('Waiting for data... {}'.format(db.events.count()))
-        time.sleep(app.config['BOOTSTRAP_WAIT'])
+    # while not db.events.count():
+    #     logger.info('Waiting for data... {}'.format(db.events.count()))
+    #     time.sleep(app.config['BOOTSTRAP_WAIT'])
     app.run(host='0.0.0.0', port=app.config['PORT'], threaded=True, use_reloader=False)
-    thread.join()
