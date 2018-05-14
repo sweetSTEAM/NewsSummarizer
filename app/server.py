@@ -19,8 +19,8 @@ app.config.update(dict(
 ))
 
 db_client = MongoClient(
-    os.environ['DB_PORT_27017_TCP_ADDR'],
-    os.environ['DB_PORT_27017_TCP_PORT'])
+    'localhost',
+    27017)
 db = db_client.news
 
 # global events

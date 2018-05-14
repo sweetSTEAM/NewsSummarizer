@@ -9,8 +9,8 @@ from nlp.analysis import Analyzer
 from pymongo import MongoClient
 
 db_client = MongoClient(
-    os.environ['DB_PORT_27017_TCP_ADDR'],
-    os.environ['DB_PORT_27017_TCP_PORT'])
+    'localhost',
+    27017)
 db = db_client.news
 
 config = dict(

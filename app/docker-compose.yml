@@ -5,7 +5,6 @@ services:
     image: "mongo:latest"
     ports:
      - "27017:27017"
-    restart: always
     networks:
      - db_net
 

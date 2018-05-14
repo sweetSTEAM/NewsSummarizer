@@ -10,8 +10,8 @@ from pymongo import MongoClient
 from multiprocessing import Pool, cpu_count
 
 db_client = MongoClient(
-    os.environ['DB_PORT_27017_TCP_ADDR'],
-    os.environ['DB_PORT_27017_TCP_PORT'])
+    'localhost',
+    27017)
 db = db_client.news
 
 config = dict(
@@ -24,7 +24,7 @@ config = dict(
 def load_news():
     last_dt = None
     while True:
-        pool = multiprocessing.Pool(processes=config['NUM_PROCESSES'])
+        pool = Pool(processes=config['NUM_PROCESSES'])
         parsers_ = [
             Gazeta(),
             Tass(),
