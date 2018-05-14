@@ -129,8 +129,13 @@ class Analyzer():
         clusters_summed = []
         for news_ids in clusters:
             text = '\n'.join([self._data.iloc[id]['text'] for id in news_ids])
+            try:
+                divr = divrank(text, self.config['divrank'])
+            except Exception as e:
+                divr = ''
+                print('divrank error')
             clusters_summed.append({
-                'sumbasic': sum_basic(text, self.config['sumbasic']), 'divrank': divrank(text, self.config['divrank']),
+                'sumbasic': sum_basic(text, self.config['sumbasic']), 'divrank': divr,
                 'content': news_ids
             })
         return clusters_summed
