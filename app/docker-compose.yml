@@ -44,6 +44,7 @@ services:
     environment:
      - ANALYZER_UPDATE_RATE=600
      - ANALYZER_BOOTSTRAP_WAIT=90
+     - NUM_PROCESSES=4
     volumes:
      - .:/app
     networks:

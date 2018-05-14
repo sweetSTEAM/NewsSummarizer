@@ -43,7 +43,6 @@ class BaseParser():
         self.root_url = root_url  # url for news
         self.api_url = api_url  # url for pages
         self.page_type = page_type
-        self._worker_session = None
         self.curr_date = None
         self.TZ = pytz.timezone('Europe/Moscow')
 
@@ -116,17 +115,13 @@ class BaseParser():
             logger.error("Error {} on {}".format(
                 traceback.format_exc(), news_params[0]))
 
-    def _request(self, url, session):
-        response = session.get(url)
+    def _request(self, url):
+        response = requests.get(url)
         response.raise_for_status()
         return response
 
     def _get_content(self, url, session=None, type_='html'):
-        if not session:
-            if not self._worker_session:
-                self._worker_session = requests.Session()
-            session = self._worker_session
-        response = self._request(url, session)
+        response = self._request(url)
         if type_ == 'html':
             return BeautifulSoup(response.text.encode('utf-8'), 'lxml')
         elif type_ == 'json':
