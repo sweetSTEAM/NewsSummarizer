@@ -50,7 +50,7 @@ def load_news():
             parser.parse(pool, until_time=last_dt)
         last_dt = now
 
-        pool.cancel()
+        pool.close()
         pool.join()
         logger.info('New news: {}'.format(db.raw_news.count()))
         time.sleep(config['UPDATE_RATE'])
