@@ -1,0 +1,45 @@
+{% for group in groups %}
+    {% if group['content']|length > 0 %}
+    <div class="w3-container">
+       <h1 class="w3-xlarge w3-text-blue"><b>{{ group['content'][0]['title'] }}</b></h1>
+      <hr style="width:50px;border:5px solid #2196F3" class="w3-round w3-blue">
+    </div>
+
+    <div class="w3-row-padding w3-light-grey">
+    <div class="w3-half w3-container w3-margin-bottom">
+        <div class="w3-container">
+          <p>
+            <span class="w3-opacity">DivRank Summary</span>
+          </p>
+          <p>{{ group['divrank'] }}</p>
+        </div>
+      </div>
+      <div class="w3-half w3-container w3-margin-bottom">
+        <div class="w3-container">
+          <p>
+            <span class="w3-opacity">SumBasic Summary</span>
+          </p>
+          <p>{{ group['sumbasic'] }}</p>
+        </div>
+      </div>
+    </div>
+    
+    {% for news in range(0, group['content']|length, 3) %}
+    <div class="w3-row-padding">
+      {% for id in range(news, (group['content']|length, news+3)|min) %}
+      <div class="w3-third w3-container w3-margin-bottom">
+        <div class="w3-container w3-hover-light-grey">
+          <p><a href="{{ group['content'][id]['url'] }}" class="w3-text"><b>{{ group['content'][id]['title'] }}</b></a></p>
+          <p>
+            <span class="w3-opacity">{{ group['content'][id]['media'] }}</span> {{ group['content'][id]['date'] }}
+            <span class="w3-tag w3-blue">{{ group['content'][id]['labels']['SVM'] }}
+            </span>
+          </p>
+          <p>{{ group['content'][id]['text'] }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+    {% endif %}
+  {% endfor %}

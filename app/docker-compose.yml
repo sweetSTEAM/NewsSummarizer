@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  mongo:
+    image: "mongo:latest"
+    ports:
+     - "27017:27017"
+    restart: always
+    networks:
+     - db_net
+
+  server:
+    build: .
+    command: python3 server.py
+    ports:
+     - "80:80"
+    volumes:
+     - .:/app
+    environment:
+     - PORT=80
+     - OFFSET=5
+     - SERVER_UPDATE_RATE=300
+     - SERVER_BOOTSTRAP_WAIT=240
+    networks:
+     - db_net
+    links:
+     - mongo
+
+  getter:
+    build: .
+    command: python3 news_getter.py
+    environment:
+     - GETTER_UPDATE_RATE=600
+     - HOURS_INIT=12
+    volumes:
+     - .:/app
+    networks:
+     - db_net
+    links:
+     - mongo
+
+  analyzer:
+    build: .
+    command: python3 news_analyzer.py
+    environment:
+     - ANALYZER_UPDATE_RATE=600
+     - ANALYZER_BOOTSTRAP_WAIT=90
+    volumes:
+     - .:/app
+    networks:
+     - db_net
+    links:
+     - mongo
+
+networks:
+  db_net:

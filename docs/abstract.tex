@@ -1,0 +1,21 @@
+\titleformat{\section}[block]
+{\centering\fontsize{16pt}{18pt}\selectfont\bfseries}{\thesection\cftsecaftersnum}{0.5em}{} % по центру
+
+\section*{Аннотация}
+Данная работа описывает процесс реализации сервиса, способного значительно улучшить
+и упростить пользовательское взаимодействие с новостным контентом, используя обработку
+естественного языка (Natural Language Processing, NLP). Сервис анализирует поток русскоязычных новостных статей в реальном времени, группирует их по конкретным событиям и выделяет ключевую информацию о событии.
+Для построения такого сервиса мы изучаем и используем различные методы и модели, распространенные в NLP для решения следующих задач:
+нормализация, векторизация, кластеризация и суммаризация текста.
+Кластеризация используется для выделения из потока данных множества статей, относящемся к одному событию.
+Мы собираем и обрабатываем большое количество данных с web-сайтов медиа и обучаем векторизатор TF-IDF, позволяющий использовать K-means для кластеризации.
+Суммаризация извлекает самую ценную информацию из кластера об этом событии.
+
+
+\section*{Abstract}
+This work describes implementation of service that can significantly improve user experience in news content consumption by using Natural Language Processing (NLP for short). The service analyses stream of news articles from russian media web-sites in real-time, groups news by events and extracts the most valuable information about the events.
+To implement this service we first research and then use models and methods from NLP to find suitable solution for the following problems: normalization, vectorization, clusterization and summarization of text.
+Clusterization allows us to automatically group news by events. In order for this to work, we collect the data from web-sites of media and train TF-IDF model allows to use K-means algorithm for news clusterization. 
+
+\titleformat{\section}[block]
+{\raggedright\fontsize{16pt}{18pt}\selectfont\bfseries}{\thesection\cftsecaftersnum}{0.5em}{} % справа
