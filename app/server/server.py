@@ -48,7 +48,7 @@ def get_content(topic_count=5):
             url_for('get_content', topic_count=len(events)))
     events_sliced = events[:topic_count]
     return render_template('main.html', groups_count=len(events),
-                           count=analizer.get_count(), groups=events_sliced)
+                           count=db.events.count(), groups=events_sliced)
 
 
 @app.route('/api/<int:offset>')
