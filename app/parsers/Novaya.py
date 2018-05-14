@@ -20,11 +20,6 @@ class Novaya(BaseParser):
         self.news_per_page = 100
         self.offset = 0
 
-    def _check_args(self, start_time, until_time,
-                    news_count, topic_filter, procs):
-        if not start_time is None:
-            raise Exception("Start time for Novaya is not implemented")
-
     def _get_news_list(self, content):
         """ Getting list of news from page content """
         return sorted(content['items'],

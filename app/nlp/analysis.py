@@ -22,9 +22,9 @@ class Analyzer():
                 'batch_size': 32, 'n_init': 10, 'max_iter': 100
             },
             'append_titles': True,
-            'svm_path': './models/SVM_classifier.bin',
-            'svm_labels_path': './models/LabelEncoder.bin',
-            'tfidf_path': './models/TFIDF_vectorizer.bin',
+            'svm_path': '/app/nlp/models/SVM_classifier.bin',
+            'svm_labels_path': '/app/nlp/models/LabelEncoder.bin',
+            'tfidf_path': '/app/nlp/TFIDF_vectorizer.bin',
             'max_news_distance_secs': 24*60*60,
             'drop_duplicates': False,
             'sumbasic': {

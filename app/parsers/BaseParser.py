@@ -124,5 +124,5 @@ class BaseParser():
             raise Exception()
 
     def _check_args(self, start_time, until_time,
-                    news_count, topic_filter, procs):
+                    news_count, topic_filter):
         pass
