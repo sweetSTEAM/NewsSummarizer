@@ -59,7 +59,7 @@ def api_get_content(offset=app.config['OFFSET']):
         response.status_code = 404
         return response
     if len(events) < offset + app.config['OFFSET']:
-        events = events[offset:len(groups)]
+        events = events[offset:len(events)]
     events = events[offset:offset + app.config['OFFSET']]
     return jsonify({'data': render_template('view.html', groups=events)})
 
