@@ -20,7 +20,7 @@ class Analyzer():
     def __init__(self, config={
             'kmeans': {
                 'proximity_coeff': 0.6, 'n_clusters_coeff': 4,
-                'batch_size': 32, 'n_init': 10, 'max_iter': 100
+                'batch_size': 100, 'n_init': 10, 'max_iter': 300
             },
             'append_titles': True,
             'svm_path': 'nlp/models/SVM_classifier.bin',
