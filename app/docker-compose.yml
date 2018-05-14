@@ -26,7 +26,7 @@ services:
     build: getter
     environment:
      - GETTER_UPDATE_RATE=600
-     - HOURS_INIT=12
+     - HOURS_INIT=10
     volumes:
      - ./getter:/app
     networks:
