@@ -32,7 +32,7 @@ class Lenta(BaseParser):
         return self.api_url + self._time_to_str(self.curr_date)
 
     def _next_page_url(self):
-        self.curr_date -= datetime.timedelta(days=1)
+        self.curr_date -= int(datetime.timedelta(days=1).total_seconds())
         return self._page_url()
 
     def _parse_news(self, news_params):
