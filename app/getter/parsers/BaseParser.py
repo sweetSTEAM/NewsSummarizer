@@ -46,14 +46,15 @@ class BaseParser():
         self.TZ = pytz.timezone('Europe/Moscow')
 
     def parse(self, pool,
-                    start_time=datetime.datetime.now().replace(
-            tzinfo=pytz.utc).astimezone(self.TZ), until_time=None,
+                    start_time=None, until_time=None,
                     news_count=None, topic_filter=None):
         """ Url extraction from pages in parant process """
         t_start = time.time()
         self._check_args(start_time, until_time, news_count,
                          topic_filter)
-        # Some parsers do not have start time, so need to check
+        if not start_time:
+            start_time = datetime.datetime.now().replace(
+                tzinfo=pytz.utc).astimezone(self.TZ)
         start_time = start_time.timestamp()
         if until_time:
             until_time = until_time.timestamp()
