@@ -21,4 +21,5 @@ RUN wget "https://www.dropbox.com/sh/8s9qfy5rf1o5bbd/AAAVSVQZorVr6JH8LPJQX9tva?d
 	-O models.zip
 RUN unzip models.zip -x /
 RUN python3 -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
+WORKDIR /app
 CMD ["python3", "news_analyzer.py"]
