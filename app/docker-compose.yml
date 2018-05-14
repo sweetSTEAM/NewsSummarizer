@@ -26,7 +26,7 @@ services:
     build: getter
     environment:
      - GETTER_UPDATE_RATE=600
-     - HOURS_INIT=10
+     - HOURS_INIT=8
     volumes:
      - ./getter:/app
     networks:
@@ -38,7 +38,7 @@ services:
     build: analyzer
     environment:
      - ANALYZER_UPDATE_RATE=600
-     - ANALYZER_BOOTSTRAP_WAIT=50
+     - ANALYZER_BOOTSTRAP_WAIT=80
      - NUM_PROCESSES=8
     volumes:
      - ./analyzer:/app
