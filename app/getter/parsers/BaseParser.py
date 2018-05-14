@@ -46,7 +46,8 @@ class BaseParser():
         self.TZ = pytz.timezone('Europe/Moscow')
 
     def parse(self, pool,
-                    start_time=datetime.datetime.now(), until_time=None,
+                    start_time=datetime.datetime.now().replace(
+            tzinfo=pytz.utc).astimezone(self.TZ), until_time=None,
                     news_count=None, topic_filter=None):
         """ Url extraction from pages in parant process """
         t_start = time.time()
