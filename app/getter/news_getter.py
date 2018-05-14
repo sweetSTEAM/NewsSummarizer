@@ -31,6 +31,8 @@ if not len(logger.handlers):
     logger.addHandler(console)
 
 def load_news():
+    db.raw_news.remove({})
+    db.events.remove({})
     last_dt = None
     while True:
         logger.info('iteration started')
