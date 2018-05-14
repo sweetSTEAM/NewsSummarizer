@@ -119,7 +119,7 @@ class BaseParser():
         response.raise_for_status()
         return response
 
-    def _get_content(self, url, session=None, type_='html'):
+    def _get_content(self, url, type_='html'):
         response = self._request(url)
         if type_ == 'html':
             return BeautifulSoup(response.text.encode('utf-8'), 'lxml')
