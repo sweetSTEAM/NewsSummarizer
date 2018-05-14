@@ -35,8 +35,6 @@ class Analyzer():
                 'summary_length': 5
             }
         }):
-        print(os.getcwd())
-        print(os.listdir('nlp/models'))
         self.config = config
         self._data = pd.DataFrame([])
         self._last_time = 0

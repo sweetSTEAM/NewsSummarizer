@@ -7,7 +7,7 @@ import datetime
 import pytz
 from nlp.analysis import Analyzer
 from pymongo import MongoClient
-time.sleep(1000)
+
 db_client = MongoClient(
     'mongo',
     27017)
