@@ -52,7 +52,7 @@ def load_news():
 
         pool.cancel()
         pool.join()
-        logger.info('New news: {}'.format(db.raw_news.count())
+        logger.info('New news: {}'.format(db.raw_news.count()))
         time.sleep(config['UPDATE_RATE'])
 
 
