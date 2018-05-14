@@ -8,6 +8,7 @@ from sklearn.cluster import KMeans, MiniBatchKMeans
 import time
 import numpy as np
 import pytz
+import os
 
 TZ = pytz.timezone('Europe/Moscow')
 
@@ -24,7 +25,7 @@ class Analyzer():
             'append_titles': True,
             'svm_path': './models/SVM_classifier.bin',
             'svm_labels_path': './models/LabelEncoder.bin',
-            'tfidf_path': './TFIDF_vectorizer.bin',
+            'tfidf_path': './models/TFIDF_vectorizer.bin',
             'max_news_distance_secs': 24*60*60,
             'drop_duplicates': False,
             'sumbasic': {
@@ -34,6 +35,8 @@ class Analyzer():
                 'summary_length': 5
             }
         }):
+        print(os.getcwd())
+        print(os.listdir(os.getcwd()))
         self.config = config
         self._data = pd.DataFrame([])
         self._last_time = 0
