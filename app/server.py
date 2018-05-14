@@ -34,7 +34,6 @@ db_client = MongoClient(
     27017)
 db = db_client.news
 
-# global events
 events = []
 
 @app.route('/')
@@ -45,7 +44,6 @@ def index():
 
 @app.route('/<int:topic_count>')
 def get_content(topic_count=5):
-    # global events
     if len(events) < topic_count:
         return redirect(
             url_for('get_content', topic_count=len(events)))
@@ -56,7 +54,6 @@ def get_content(topic_count=5):
 
 @app.route('/api/<int:offset>')
 def api_get_content(offset=app.config['OFFSET']):
-    # global events
     if offset >= len(events):
         response = jsonify(message="Topic number too large")
         response.status_code = 404
@@ -73,7 +70,6 @@ def reverse_filter(s):
 
 
 def update_events():
-    # global events
     while True:
         if db.events.count():
             events = list(db.events.find())

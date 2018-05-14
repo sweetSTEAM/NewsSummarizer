@@ -3,7 +3,6 @@ import re
 import json
 import datetime
 from bs4 import BeautifulSoup
-import requests
 import logging
 import time
 import random
