@@ -13,8 +13,6 @@ services:
     command: python3 server.py
     ports:
      - "80:80"
-    volumes:
-     - .:/app
     environment:
      - PORT=80
      - OFFSET=5
@@ -31,8 +29,6 @@ services:
     environment:
      - GETTER_UPDATE_RATE=600
      - HOURS_INIT=12
-    volumes:
-     - .:/app
     networks:
      - db_net
     links:
@@ -45,8 +41,6 @@ services:
      - ANALYZER_UPDATE_RATE=600
      - ANALYZER_BOOTSTRAP_WAIT=90
      - NUM_PROCESSES=4
-    volumes:
-     - .:/app
     networks:
      - db_net
     links:
