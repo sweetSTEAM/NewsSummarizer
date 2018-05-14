@@ -109,7 +109,7 @@ class BaseParser():
                 return
             news_out['media'] = self.id
             COLLECTION.insert_one(news_out)
-            logger.debug('Pushed to db' + news_out['url'])
+            logger.info('Pushed to db' + news_out['url'])
         except Exception as err:
             logger.error("Error {} on {}".format(
                 traceback.format_exc(), news_params[0]))
