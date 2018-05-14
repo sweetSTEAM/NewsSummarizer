@@ -39,7 +39,7 @@ def analyze_news():
             analyzer.fit(new_data)
             for row in new_data:
                 db.raw_news.delete_one({'url': row['url']})
-            events = analyzer.get_events():
+            events = analyzer.get_events()
             logger.info('New events length: {}'.format(len(new_data)))
             if events:
                 db.events.remove({})
