@@ -38,7 +38,7 @@ services:
     build: analyzer
     environment:
      - ANALYZER_UPDATE_RATE=600
-     - ANALYZER_BOOTSTRAP_WAIT=80
+     - ANALYZER_BOOTSTRAP_WAIT=100
      - NUM_PROCESSES=8
     volumes:
      - ./analyzer:/app
