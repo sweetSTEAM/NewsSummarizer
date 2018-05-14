@@ -18,7 +18,7 @@ services:
      - PORT=80
      - OFFSET=5
      - SERVER_UPDATE_RATE=300
-     - SERVER_BOOTSTRAP_WAIT=240
+     - SERVER_BOOTSTRAP_WAIT=400
     networks:
      - db_net
     links:
@@ -28,7 +28,7 @@ services:
     build: getter
     environment:
      - GETTER_UPDATE_RATE=600
-     - HOURS_INIT=12
+     - HOURS_INIT=6
     volumes:
      - ./getter:/app
     networks:
@@ -40,7 +40,7 @@ services:
     build: analyzer
     environment:
      - ANALYZER_UPDATE_RATE=600
-     - ANALYZER_BOOTSTRAP_WAIT=90
+     - ANALYZER_BOOTSTRAP_WAIT=200
      - NUM_PROCESSES=4
     volumes:
      - ./analyzer:/app
