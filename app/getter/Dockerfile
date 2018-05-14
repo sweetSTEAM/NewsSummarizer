@@ -7,7 +7,7 @@ RUN apt-get update \
     	python3-pip \
     	unzip
 RUN pip3 install --upgrade pip
-RUN pip3 install pymongo pytz requests pytz bs4
+RUN pip3 install pymongo pytz requests pytz bs4 lxml
 
 RUN mkdir app
 WORKDIR /app
