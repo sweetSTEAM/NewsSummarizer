@@ -4,6 +4,7 @@ import re
 from bs4 import BeautifulSoup
 from .BaseParser import BaseParser
 import time
+import pytz
 
 
 class Lenta(BaseParser):

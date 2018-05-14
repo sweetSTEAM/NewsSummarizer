@@ -13,14 +13,14 @@ import pytz
 from pymongo import MongoClient
 
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('baseparser')
 if not len(logger.handlers):
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
     console = logging.StreamHandler()
     formatter = logging.Formatter(
         '%(asctime)s - %(message)s', '%Y-%m-%d %H:%M:%S')
     console.setFormatter(formatter)
-    console.setLevel(logging.INFO)
+    console.setLevel(logging.DEBUG)
     logger.addHandler(console)
 
 
@@ -61,14 +61,8 @@ class BaseParser():
         self.curr_date = start_time
         url_counter = 0
         page_session = requests.Session()
+        url_to_fetch = self._page_url()
         while True:
-            if self.curr_date == start_time:
-                url_to_fetch = self._page_url()
-            else:
-                url_to_fetch = self._next_page_url()
-
-            logger.info('Lookup page {}'.format(url_to_fetch))
-
             try:
                 content = self._get_content(url_to_fetch, page_session, type_=self.page_type)
                 news_list = self._get_news_list(content)
@@ -79,6 +73,7 @@ class BaseParser():
                     'Error: couldn\'t find content {} {}'.format(url_to_fetch, e))
                 break
 
+            logger.info('Look at page {}'.format(url_to_fetch))
             for news in news_list:
                 try:
                     # Url always first, date always second in params
@@ -87,7 +82,6 @@ class BaseParser():
                         continue
                     url = news_params[0]
                     self.curr_date = news_params[1]
-                    logging.info(str((self.curr_date, until_time)))
                     if ((news_count is not None and url_counter >= news_count) or
                             (until_time is not None and self.curr_date <= until_time)):
                         break
@@ -100,6 +94,11 @@ class BaseParser():
                 except Exception as e:
                     logger.error(
                         'Error on url {}: {} '.format(url_to_fetch, traceback.format_exc()))
+            else:
+                url_to_fetch = self._next_page_url()
+                continue
+            break
+
         logger.info('End of parsing, time: {}'.format(
             time.strftime('%H:%M:%S', time.gmtime(time.time() - t_start))))
 

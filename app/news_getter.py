@@ -20,7 +20,7 @@ config = dict(
     NUM_PROCESSES=int(os.environ.get('NUM_PROCESSES', cpu_count())),
 )
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('getter')
 if not len(logger.handlers):
     logger.setLevel(logging.INFO)
     console = logging.StreamHandler()

@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from .BaseParser import BaseParser
 import time
 from multiprocessing import cpu_count
+import pytz
 
 
 class Vedomosti(BaseParser):
