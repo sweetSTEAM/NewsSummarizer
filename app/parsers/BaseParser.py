@@ -87,6 +87,7 @@ class BaseParser():
                         continue
                     url = news_params[0]
                     self.curr_date = news_params[1]
+                    logging.info(str(self.curr_date, until_time))
                     if ((news_count is not None and url_counter >= news_count) or
                             (until_time is not None and self.curr_date <= until_time)):
                         break

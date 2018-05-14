@@ -5,6 +5,7 @@ import time
 from threading import Thread
 import os
 from pymongo import MongoClient
+import logging
 
 logger = logging.getLogger(__name__)
 if not len(logger.handlers):
