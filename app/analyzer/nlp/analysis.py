@@ -20,13 +20,13 @@ class Analyzer():
     def __init__(self, config={
             'kmeans': {
                 'proximity_coeff': 0.6, 'n_clusters_coeff': 4,
-                'batch_size': 50, 'n_init': 10, 'max_iter': 100
+                'batch_size': 20, 'n_init': 10, 'max_iter': 100
             },
             'append_titles': True,
             'svm_path': 'nlp/models/SVM_classifier.bin',
             'svm_labels_path': 'nlp/models/LabelEncoder.bin',
             'tfidf_path': 'nlp/models/TFIDF_vectorizer.bin',
-            'max_news_distance_secs': 24*60*60,
+            'max_news_distance_secs': 12*60*60,
             'drop_duplicates': True,
             'sumbasic': {
                 'summary_length': 5

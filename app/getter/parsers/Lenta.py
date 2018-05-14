@@ -14,6 +14,7 @@ class Lenta(BaseParser):
             id='LENTA', root_url='https://lenta.ru',
             api_url='https://lenta.ru/news',
             page_type='html', **kwargs)
+        self._d_counter = 0
 
     def _get_news_list(self, content):
         """ Getting list of news from page content """
@@ -25,6 +26,7 @@ class Lenta(BaseParser):
         news_date = self._str_to_time(
             self._time_to_str(self.curr_date) + ' '
             + news.find('span', 'time').text)
+        print('DEBUG ' + str(news_date))
         return news_url, news_date
 
     def _page_url(self):
@@ -32,7 +34,8 @@ class Lenta(BaseParser):
         return self.api_url + self._time_to_str(self.curr_date)
 
     def _next_page_url(self):
-        self.curr_date -= int(datetime.timedelta(days=1).total_seconds())
+        self._d_counter += 1
+        self.curr_date = int(datetieme.datetime.now().timestamp() - datetime.timedelta(days=self._d_counter).total_seconds())
         return self._page_url()
 
     def _parse_news(self, news_params):
