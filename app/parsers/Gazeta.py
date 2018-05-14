@@ -57,7 +57,8 @@ class Gazeta(BaseParser):
         return news_out
 
     def _time_to_str(self, time):
-        return time.strftime('%d.%m.%Y_%H:%M')
+        return datetime.datetime.utcfromtimestamp(time).replace(
+            tzinfo=pytz.utc).astimezone(self.TZ).strftime('%d.%m.%Y_%H:%M')
 
     def _get_content(self, url, session=None, type_='html'):
         if not session:

@@ -10,7 +10,7 @@ from pymongo import MongoClient
 from multiprocessing import Pool, cpu_count
 
 db_client = MongoClient(
-    'localhost',
+    'mongo',
     27017)
 db = db_client.news
 

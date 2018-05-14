@@ -64,7 +64,7 @@ class Tass(BaseParser):
         return news_out
 
     def _time_to_str(self, time):
-        return time.timestamp()
+        return time
 
     def _str_to_time(self, time_str):
         ts = int(time_str)

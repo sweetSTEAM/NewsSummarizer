@@ -54,4 +54,5 @@ class Vedomosti(BaseParser):
         return datetime.datetime.strptime(time_str[:-6], '%Y-%m-%d %H:%M:%S').replace(tzinfo=self.TZ)
 
     def _time_to_str(self, time):
-        return time.strftime('/%Y/%m/%d/')
+        return datetime.datetime.utcfromtimestamp(time).replace(
+            tzinfo=pytz.utc).astimezone(self.TZ).strftime('/%Y/%m/%d/')

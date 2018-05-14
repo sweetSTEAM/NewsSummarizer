@@ -19,7 +19,7 @@ app.config.update(dict(
 ))
 
 db_client = MongoClient(
-    'localhost',
+    'mongo',
     27017)
 db = db_client.news
 
