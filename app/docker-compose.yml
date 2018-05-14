@@ -13,7 +13,7 @@ services:
     ports:
      - "80:80"
     volumes:
-     - .:/app
+     - ./server:/app
     environment:
      - PORT=80
      - OFFSET=5
@@ -30,7 +30,7 @@ services:
      - GETTER_UPDATE_RATE=600
      - HOURS_INIT=12
     volumes:
-     - .:/app
+     - ./getter:/app
     networks:
      - db_net
     links:
@@ -43,7 +43,7 @@ services:
      - ANALYZER_BOOTSTRAP_WAIT=90
      - NUM_PROCESSES=4
     volumes:
-     - .:/app
+     - ./analyzer:/app
     networks:
      - db_net
     links:
