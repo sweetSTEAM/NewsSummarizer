@@ -58,11 +58,10 @@ class BaseParser():
             until_time = until_time.timestamp()
         self.curr_date = start_time
         url_counter = 0
-        page_session = requests.Session()
         url_to_fetch = self._page_url()
         while True:
             try:
-                content = self._get_content(url_to_fetch, page_session, type_=self.page_type)
+                content = self._get_content(url_to_fetch, type_=self.page_type)
                 news_list = self._get_news_list(content)
                 if not news_list:
                     raise Exception('No content')
