@@ -27,7 +27,7 @@ class Analyzer():
             'svm_labels_path': './nlp/models/LabelEncoder.bin',
             'tfidf_path': './nlp/models/TFIDF_vectorizer.bin',
             'max_news_distance_secs': 24*60*60,
-            'drop_duplicates': False,
+            'drop_duplicates': True,
             'sumbasic': {
                 'summary_length': 5
             },
