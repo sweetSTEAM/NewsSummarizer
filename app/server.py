@@ -70,7 +70,7 @@ def update_events():
 
 
 if __name__ == "__main__":
-    # global events
+    print('started')
     thread = Thread(target=update_events)
     thread.start()
     while not events:

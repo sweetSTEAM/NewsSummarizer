@@ -23,7 +23,7 @@ def setup_log():
     formatter = logging.Formatter(
         '%(asctime)s - %(message)s', '%Y-%m-%d %H:%M:%S')
     console.setFormatter(formatter)
-    # console.setLevel(logging.INFO)
+    console.setLevel(logging.INFO)
     logger.addHandler(console)
 
 
