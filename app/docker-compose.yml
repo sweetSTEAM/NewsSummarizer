@@ -18,7 +18,7 @@ services:
      - PORT=80
      - OFFSET=5
      - SERVER_UPDATE_RATE=300
-     - SERVER_BOOTSTRAP_WAIT=400
+     - SERVER_BOOTSTRAP_WAIT=200
     networks:
      - db_net
     links:
@@ -40,8 +40,8 @@ services:
     build: analyzer
     environment:
      - ANALYZER_UPDATE_RATE=600
-     - ANALYZER_BOOTSTRAP_WAIT=200
-     - NUM_PROCESSES=4
+     - ANALYZER_BOOTSTRAP_WAIT=100
+     - NUM_PROCESSES=8
     volumes:
      - ./analyzer:/app
     networks:
