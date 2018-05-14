@@ -33,6 +33,7 @@ def analyze_news():
     analyzer = Analyzer()
     time.sleep(config['BOOTSTRAP_WAIT'])
     while True:
+        logger.info('News in db {}'.format(db.raw_news.count()))
         if db.raw_news.count():
             new_data = list(db.raw_news.find())
             logger.info('New data length: {}'.format(len(new_data)))
@@ -40,7 +41,7 @@ def analyze_news():
             for row in new_data:
                 db.raw_news.delete_one({'url': row['url']})
             events = analyzer.get_events()
-            logger.info('New events length: {}'.format(len(new_data)))
+            logger.info('New events length: {}'.format(len(events)))
             if events:
                 db.events.remove({})
                 db.events.insert_many(events)

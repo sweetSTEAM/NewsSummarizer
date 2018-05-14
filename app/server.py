@@ -6,6 +6,16 @@ from threading import Thread
 import os
 from pymongo import MongoClient
 
+logger = logging.getLogger(__name__)
+if not len(logger.handlers):
+    logger.setLevel(logging.INFO)
+    console = logging.StreamHandler()
+    formatter = logging.Formatter(
+        '%(asctime)s - %(message)s', '%Y-%m-%d %H:%M:%S')
+    console.setFormatter(formatter)
+    console.setLevel(logging.INFO)
+    logger.addHandler(console)
+
 app = Flask(__name__, template_folder='./frontend/templates',
                       static_folder='./frontend/static',
                       static_url_path='/static')
@@ -70,11 +80,11 @@ def update_events():
 
 
 if __name__ == "__main__":
-    print('started')
     thread = Thread(target=update_events)
     thread.start()
+    logger.info('started')
     while not events:
-        print('Waiting for data...')
+        logger.info('Waiting for data...')
         time.sleep(app.config['BOOTSTRAP_WAIT'])
     app.run(host='0.0.0.0', port=app.config['PORT'], threaded=True, use_reloader=False)
     thread.join()

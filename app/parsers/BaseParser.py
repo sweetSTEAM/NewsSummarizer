@@ -67,6 +67,8 @@ class BaseParser():
             else:
                 url_to_fetch = self._next_page_url()
 
+            logger.info('Lookup page {}'.format(url_to_fetch))
+
             try:
                 content = self._get_content(url_to_fetch, page_session, type_=self.page_type)
                 news_list = self._get_news_list(content)

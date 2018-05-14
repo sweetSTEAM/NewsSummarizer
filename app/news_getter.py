@@ -10,7 +10,7 @@ from pymongo import MongoClient
 from multiprocessing import Pool, cpu_count
 
 db_client = MongoClient(
-    'mongo',
+    'localhost',
     27017)
 db = db_client.news
 
@@ -46,7 +46,7 @@ def load_news():
         if not last_dt:
             last_dt = now - datetime.timedelta(hours=config['HOURS_INIT'])
         for parser in parsers_:
-            logger.info(parser.id, last_dt)
+            logger.info(parser.id + ' ' + str(last_dt))
             parser.parse(pool, until_time=last_dt)
         last_dt = now
 
