@@ -41,7 +41,7 @@ services:
      - ANALYZER_BOOTSTRAP_WAIT=120
      - NUM_PROCESSES=8
     volumes:
-     - ./analyzer:/app
+     - large:/app
     networks:
      - db_net
     links:
@@ -49,3 +49,9 @@ services:
 
 networks:
   db_net:
+
+volumes:
+  large:
+    driver: pure
+    driver_opts:
+      size: 50G

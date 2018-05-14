@@ -29,10 +29,10 @@ class Analyzer():
             'max_news_distance_secs': 12*60*60,
             'drop_duplicates': True,
             'sumbasic': {
-                'summary_length': 5
+                'summary_length': 4
             },
             'divrank': {
-                'summary_length': 5
+                'summary_length': 4
             }
         }):
         self.config = config
