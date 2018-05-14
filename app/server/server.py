@@ -73,6 +73,7 @@ def update_events():
     while True:
         if db.events.count():
             events = list(db.events.find())
+            logger.info('Server get {} events'.format(len(events)))
         time.sleep(app.config['UPDATE_RATE'])
 
 
