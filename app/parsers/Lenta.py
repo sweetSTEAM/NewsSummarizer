@@ -64,4 +64,4 @@ class Lenta(BaseParser):
             tzinfo=pytz.utc).astimezone(self.TZ).strftime('/%Y/%m/%d/')
 
     def _str_to_time(self, time_str):
-        return datetime.datetime.strptime(time_str, '/%Y/%m/%d/ %H:%M').replace(tzinfo=self.TZ)
+        return datetime.datetime.strptime(time_str, '/%Y/%m/%d/ %H:%M').replace(tzinfo=self.TZ).timestamp()

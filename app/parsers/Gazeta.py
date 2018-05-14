@@ -24,9 +24,7 @@ class Gazeta(BaseParser):
                                              attrs={"itemprop": 'mainEntityOfPage url'})['href']
         timestamp = int(news.find('meta',
                                   attrs={"itemprop": "position"})['content'])
-        news_date = datetime.datetime.utcfromtimestamp(timestamp).replace(
-            tzinfo=pytz.utc).astimezone(self.TZ)
-        return news_url, news_date
+        return news_url, timestamp
 
     def _page_url(self):
         # Example: https://www.gazeta.ru/news/?p=page&d=09.04.2017_12:44

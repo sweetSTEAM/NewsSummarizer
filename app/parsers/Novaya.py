@@ -68,4 +68,5 @@ class Novaya(BaseParser):
 
     def _str_to_time(self, time_str):
         # 2017-01-31T18:59:00.000+03:00
-        return datetime.datetime.strptime(time_str[:19], '%Y-%m-%dT%H:%M:%S').replace(tzinfo=self.TZ)
+        return datetime.datetime.strptime(time_str[:19],
+            '%Y-%m-%dT%H:%M:%S').replace(tzinfo=self.TZ).timestamp()

@@ -68,8 +68,7 @@ class Tass(BaseParser):
 
     def _str_to_time(self, time_str):
         ts = int(time_str)
-        return datetime.datetime.utcfromtimestamp(ts).replace(
-            tzinfo=self.TZ).astimezone(self.TZ)
+        return ts
 
     def _remove_tass(self, text):
         prefix = text[:100]

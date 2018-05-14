@@ -62,5 +62,4 @@ class Meduza(BaseParser):
 
     def _str_to_time(self, time_str):
         ts = int(time_str)
-        return datetime.datetime.utcfromtimestamp(ts).replace(
-            tzinfo=pytz.utc).astimezone(self.TZ)
+        return ts

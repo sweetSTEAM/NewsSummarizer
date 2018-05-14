@@ -51,8 +51,9 @@ class Vedomosti(BaseParser):
         return news_out
 
     def _str_to_time(self, time_str):
-        return datetime.datetime.strptime(time_str[:-6], '%Y-%m-%d %H:%M:%S').replace(tzinfo=self.TZ)
+        return datetime.datetime.strptime(time_str[:-6],
+            '%Y-%m-%d %H:%M:%S').replace(tzinfo=self.TZ).timestamp()
 
     def _time_to_str(self, time):
-        return datetime.datetime.utcfromtimestamp(time).replace(
+        return datetime.datetime.utcfromtimestamp(int(time)).replace(
             tzinfo=pytz.utc).astimezone(self.TZ).strftime('/%Y/%m/%d/')

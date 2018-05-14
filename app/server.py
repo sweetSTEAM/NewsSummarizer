@@ -66,7 +66,7 @@ def update_events():
     while True:
         if db.events.count():
             events = list(db.events.find())
-        time.sleep(config['UPDATE_RATE'])
+        time.sleep(app.config['UPDATE_RATE'])
 
 
 if __name__ == "__main__":
@@ -75,6 +75,6 @@ if __name__ == "__main__":
     thread.start()
     while not events:
         print('Waiting for data...')
-        time.sleep(config['BOOTSTRAP_WAIT'])
+        time.sleep(app.config['BOOTSTRAP_WAIT'])
     app.run(host='0.0.0.0', port=app.config['PORT'], threaded=True, use_reloader=False)
     thread.join()
