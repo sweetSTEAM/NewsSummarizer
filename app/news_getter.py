@@ -1,4 +1,4 @@
-from parsers import Gazeta, Tass, Lenta, Vedomosti, Novaya, Meduza
+from parsers import Gazeta, Tass, Lenta, Vedomosti, Novaya, Meduza, process_init
 import logging
 import time
 import os
@@ -24,7 +24,7 @@ config = dict(
 def load_news():
     last_dt = None
     while True:
-        pool = Pool(processes=config['NUM_PROCESSES'])
+        pool = Pool(processes=config['NUM_PROCESSES'], initializer=process_init)
         parsers_ = [
             Gazeta(),
             Tass(),
@@ -37,7 +37,8 @@ def load_news():
         if not last_dt:
             last_dt = now - datetime.timedelta(hours=config['HOURS_INIT'])
         for parser in parsers_:
-            parser.parse(pool, results_collection=db.raw_news, until_time=last_dt)
+            print(parser.id, last_dt)
+            parser.parse(pool, until_time=last_dt)
         last_dt = now
 
         pool.cancel()
@@ -47,4 +48,5 @@ def load_news():
 
 
 if __name__ == '__main__':
+    print('started')
     load_news()

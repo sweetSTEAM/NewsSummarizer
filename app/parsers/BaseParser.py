@@ -5,44 +5,49 @@ import datetime
 from bs4 import BeautifulSoup
 import requests
 import logging
-import signal
-import queue
 import time
 import random
-import shutil
 import os
 import traceback
-import csv
 import pytz
+from pymongo import MongoClient
 
-
-def setup_log():
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
+# def setup_log():
+logger = logging.getLogger(__name__)
+if not len(logger.handlers):
+    logger.setLevel(logging.DEBUG)
     console = logging.StreamHandler()
     formatter = logging.Formatter(
         '%(asctime)s - %(message)s', '%Y-%m-%d %H:%M:%S')
     console.setFormatter(formatter)
-    console.setLevel(logging.INFO)
+    console.setLevel(logging.DEBUG)
     logger.addHandler(console)
+
+
+COLLECTION = None
+def process_init():
+    global COLLECTION
+    db_client = MongoClient(
+        'mongo',
+        27017)
+    db = db_client.news
+    COLLECTION = db.raw_news
 
 
 class BaseParser():
 
     """docstring for BaseParser"""
 
-    def __init__(self, id, root_url, api_url, page_type='html', logger=logging.getLogger(__name__)):
+    def __init__(self, id, root_url, api_url, page_type='html'):
         self.id = id
         self.root_url = root_url  # url for news
         self.api_url = api_url  # url for pages
         self.page_type = page_type
         self._worker_session = None
+        self.curr_date = None
         self.TZ = pytz.timezone('Europe/Moscow')
-        self._logger = logger
-        if not self._logger.handlers:
-            setup_log()
 
-    def parse(self, pool, results_collection,
+    def parse(self, pool,
                     start_time=datetime.datetime.now(), until_time=None,
                     news_count=None, topic_filter=None):
         """ Url extraction from pages in parant process """
@@ -68,7 +73,7 @@ class BaseParser():
                 if not news_list:
                     raise Exception('No content')
             except Exception as e:
-                self._logger.error(
+                logger.error(
                     'Error: couldn\'t find content {} {}'.format(url_to_fetch, e))
                 break
 
@@ -83,26 +88,30 @@ class BaseParser():
                     if ((news_count is not None and url_counter >= news_count) or
                             (until_time is not None and self.curr_date <= until_time)):
                         break
-                    pool.map_async(self._process_news, [(news_params, results_collection)])
+                    logger.debug('push to queue ' + str(news_params))
+                    pool.map_async(self._process_news, [(news_params)])
                     url_counter += 1
                     if url_counter % 10000 == 0:
-                        self._logger.warning(
+                        logger .warning(
                             '{} {} news put to queue'.format(self.id, url_counter))
                 except Exception as e:
-                    self._logger.error(
+                    logger.error(
                         'Error on url {}: {} '.format(url_to_fetch, traceback.format_exc()))
-        self._logger.info('End of parsing, time: {}'.format(
+        logger.info('End of parsing, time: {}'.format(
             time.strftime('%H:%M:%S', time.gmtime(time.time() - t_start))))
 
-    def _process_news(self, news_params, results_collection):
+    def _process_news(self, news_params):
         try:
+            logger.debug('pulled ' + str(news_params))
             news_out = self._parse_news(news_params)
+            logger.debug('processed ' + str(news_out))
             if not news_out:
                 return
             news_out['media'] = self.id
-            results_collection.insert_one(news_out)
+            COLLECTION.insert_one(news_out)
+            logger.debug('Pushed to db' + news_out['url'])
         except Exception as err:
-            self._logger.error("Error {} on {}".format(
+            logger.error("Error {} on {}".format(
                 traceback.format_exc(), news_params[0]))
 
     def _request(self, url, session):
