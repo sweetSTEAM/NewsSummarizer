@@ -33,6 +33,7 @@ if not len(logger.handlers):
 def load_news():
     last_dt = None
     while True:
+        logger.info('iteration started')
         pool = Pool(processes=config['NUM_PROCESSES'], initializer=process_init)
         parsers_ = [
             Gazeta(),
@@ -57,5 +58,4 @@ def load_news():
 
 
 if __name__ == '__main__':
-    logger.info('started')
     load_news()
