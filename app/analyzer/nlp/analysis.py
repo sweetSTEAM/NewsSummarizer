@@ -23,9 +23,9 @@ class Analyzer():
                 'batch_size': 32, 'n_init': 10, 'max_iter': 100
             },
             'append_titles': True,
-            'svm_path': './models/SVM_classifier.bin',
-            'svm_labels_path': './models/LabelEncoder.bin',
-            'tfidf_path': './models/TFIDF_vectorizer.bin',
+            'svm_path': 'nlp/models/SVM_classifier.bin',
+            'svm_labels_path': 'nlp/models/LabelEncoder.bin',
+            'tfidf_path': 'nlp/models/TFIDF_vectorizer.bin',
             'max_news_distance_secs': 24*60*60,
             'drop_duplicates': True,
             'sumbasic': {
@@ -36,7 +36,7 @@ class Analyzer():
             }
         }):
         print(os.getcwd())
-        print(os.listdir())
+        print(os.listdir('nlp'))
         self.config = config
         self._data = pd.DataFrame([])
         self._last_time = 0
