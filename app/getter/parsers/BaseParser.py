@@ -79,7 +79,6 @@ class BaseParser():
                         continue
                     url = news_params[0]
                     if news_params[1] > self.curr_date:
-                        raise Exception('Next news should be older')
                         break
                     self.curr_date = news_params[1]
                     if ((news_count is not None and url_counter >= news_count) or
