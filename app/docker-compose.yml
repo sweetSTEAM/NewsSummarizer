@@ -9,7 +9,7 @@ services:
      - db_net
 
   server:
-    build: ./Dockerfile_server
+    build: server
     command: python3 server.py
     ports:
      - "80:80"
@@ -26,7 +26,7 @@ services:
      - mongo
 
   getter:
-    build: ./Dockerfile_getter
+    build: getter
     command: python3 news_getter.py
     environment:
      - GETTER_UPDATE_RATE=600
@@ -39,7 +39,7 @@ services:
      - mongo
 
   analyzer:
-    build: ./Dockerfile_analyzer
+    build: analyzer
     command: python3 news_analyzer.py
     environment:
      - ANALYZER_UPDATE_RATE=600
