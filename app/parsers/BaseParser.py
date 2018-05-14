@@ -24,7 +24,7 @@ def setup_log():
         '%(asctime)s - %(message)s', '%Y-%m-%d %H:%M:%S')
     console.setFormatter(formatter)
     # console.setLevel(logging.INFO)
-    slogger.addHandler(console)
+    logger.addHandler(console)
 
 
 class BaseParser():
