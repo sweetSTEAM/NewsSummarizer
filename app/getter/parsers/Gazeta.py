@@ -59,10 +59,6 @@ class Gazeta(BaseParser):
             tzinfo=pytz.utc).astimezone(self.TZ).strftime('%d.%m.%Y_%H:%M')
 
     def _get_content(self, url, session=None, type_='html'):
-        if not session:
-            if not self._worker_session:
-                self._worker_session = requests.Session()
-            session = self._worker_session
         response = self._request(url, session)
         if type_ == 'html':
             return BeautifulSoup(response.text.encode('cp1251'), 'lxml')
