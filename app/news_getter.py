@@ -20,6 +20,15 @@ config = dict(
     NUM_PROCESSES=int(os.environ.get('NUM_PROCESSES', cpu_count())),
 )
 
+logger = logging.getLogger(__name__)
+if not len(logger.handlers):
+    logger.setLevel(logging.INFO)
+    console = logging.StreamHandler()
+    formatter = logging.Formatter(
+        '%(asctime)s - %(message)s', '%Y-%m-%d %H:%M:%S')
+    console.setFormatter(formatter)
+    console.setLevel(logging.INFO)
+    logger.addHandler(console)
 
 def load_news():
     last_dt = None
@@ -37,16 +46,16 @@ def load_news():
         if not last_dt:
             last_dt = now - datetime.timedelta(hours=config['HOURS_INIT'])
         for parser in parsers_:
-            print(parser.id, last_dt)
+            logger.info(parser.id, last_dt)
             parser.parse(pool, until_time=last_dt)
         last_dt = now
 
         pool.cancel()
         pool.join()
-        print('New news: {}'.format(db.raw_news.count()))
+        logger.info('New news: {}'.format(db.raw_news.count())
         time.sleep(config['UPDATE_RATE'])
 
 
 if __name__ == '__main__':
-    print('started')
+    logger.info('started')
     load_news()

@@ -18,6 +18,16 @@ config = dict(
     BOOTSTRAP_WAIT=int(os.environ.get('ANALYZER_BOOTSTRAP_WAIT', 1.5*60))
 )
 
+logger = logging.getLogger(__name__)
+if not len(logger.handlers):
+    logger.setLevel(logging.INFO)
+    console = logging.StreamHandler()
+    formatter = logging.Formatter(
+        '%(asctime)s - %(message)s', '%Y-%m-%d %H:%M:%S')
+    console.setFormatter(formatter)
+    console.setLevel(logging.INFO)
+    logger.addHandler(console)
+
 
 def analyze_news():
     analyzer = Analyzer()
@@ -25,12 +35,15 @@ def analyze_news():
     while True:
         if db.raw_news.count():
             new_data = list(db.raw_news.find())
-            print('New data length: {}'.format(len(new_data)))
+            logger.info('New data length: {}'.format(len(new_data)))
             analyzer.fit(new_data)
             for row in new_data:
                 db.raw_news.delete_one({'url': row['url']})
-            db.events.remove({})
-            db.events.insert_many(analyzer.get_events())
+            events = analyzer.get_events():
+            logger.info('New events length: {}'.format(len(new_data)))
+            if events:
+                db.events.remove({})
+                db.events.insert_many(events)
         time.sleep(config['UPDATE_RATE'])
 
 
