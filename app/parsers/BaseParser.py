@@ -13,14 +13,14 @@ import pytz
 from pymongo import MongoClient
 
 
-logger = logging.getLogger('baseparser')
+logger = logging.getLogger(__name__)
 if not len(logger.handlers):
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(logging.INFO)
     console = logging.StreamHandler()
     formatter = logging.Formatter(
         '%(asctime)s - %(message)s', '%Y-%m-%d %H:%M:%S')
     console.setFormatter(formatter)
-    console.setLevel(logging.DEBUG)
+    console.setLevel(logging.INFO)
     logger.addHandler(console)
 
 
