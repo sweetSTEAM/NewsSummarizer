@@ -19,7 +19,7 @@ class Analyzer():
 
     def __init__(self, config={
             'kmeans': {
-                'proximity_coeff': 0.55, 'n_clusters_coeff': 2,
+                'proximity_coeff': 0.6, 'n_clusters_coeff': 3,
                 'batch_size': 50, 'n_init': 10, 'max_iter': 150
             },
             'append_titles': True,
