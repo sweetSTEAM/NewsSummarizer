@@ -83,8 +83,7 @@ class BaseParser():
                     #     break
                     self.curr_date = news_params[1]
                     self.max_ts = max(self.max_ts, self.curr_date)
-                    if ((news_count is not None and url_counter >= news_count) or
-                            (until_time is not None and self.curr_date <= until_time)):
+                    if (self.curr_date <= until_time):
                         break
                     logger.debug('push to queue ' + str(news_params))
                     pool.map_async(self._process_news, [(news_params)])
