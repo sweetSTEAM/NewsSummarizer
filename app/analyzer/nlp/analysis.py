@@ -19,7 +19,7 @@ class Analyzer():
 
     def __init__(self, config={
             'kmeans': {
-                'proximity_coeff': 0.6, 'n_clusters_coeff': 4,
+                'proximity_coeff': 0.65, 'n_clusters_coeff': 6,
                 'batch_size': 50, 'n_init': 10, 'max_iter': 150
             },
             'append_titles': True,
@@ -29,10 +29,10 @@ class Analyzer():
             'max_news_distance_secs': 12*60*60,
             'drop_duplicates': True,
             'sumbasic': {
-                'summary_length': 5
+                'summary_length': 4
             },
             'divrank': {
-                'summary_length': 5
+                'summary_length': 4
             }
         }):
         self.config = config
