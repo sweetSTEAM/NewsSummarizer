@@ -52,6 +52,6 @@ networks:
 
 volumes:
   large:
-    driver: pure
+    driver: local
     driver_opts:
       size: 50G
