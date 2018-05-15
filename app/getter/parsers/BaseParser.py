@@ -97,7 +97,7 @@ class BaseParser():
                 url_to_fetch = self._next_page_url()
                 continue
             break
-
+            
         logger.info('End of parsing, time: {}'.format(
             time.strftime('%H:%M:%S', time.gmtime(time.time() - t_start))))
 
