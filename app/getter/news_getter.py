@@ -47,7 +47,7 @@ def load_news():
         if not last_dt:
             last_dt = datetime.datetime.now() - datetime.timedelta(hours=config['HOURS_INIT'])
         else:
-            last_dt = datetime.datetime.now() - datetime.timedelta(seconds=config['UPDATE_RATE']+10)
+            last_dt = datetime.datetime.now() - datetime.timedelta(seconds=config['UPDATE_RATE'])
         for parser in parsers_:
             logger.info(parser.id + ' ' + str(last_dt))
             parser.parse(pool, until_time=last_dt)
