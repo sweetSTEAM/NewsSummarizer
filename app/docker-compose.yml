@@ -52,6 +52,5 @@ networks:
 
 volumes:
   large:
-    driver: filesystem
     driver_opts:
       size: 50G
