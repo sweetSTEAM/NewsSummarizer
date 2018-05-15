@@ -57,7 +57,6 @@ class BaseParser():
         if until_time:
             until_time = until_time.timestamp()
         self.curr_date = start_time
-        self.max_ts = self.curr_date
         url_counter = 0
         url_to_fetch = self._page_url()
         while True:
@@ -79,10 +78,7 @@ class BaseParser():
                     if not news_params:
                         continue
                     url = news_params[0]
-                    # if news_params[1] > self.curr_date:
-                    #     break
                     self.curr_date = news_params[1]
-                    self.max_ts = max(self.max_ts, self.curr_date)
                     if (self.curr_date <= until_time):
                         break
                     logger.debug('push to queue ' + str(news_params))
