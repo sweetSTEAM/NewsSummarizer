@@ -44,15 +44,13 @@ def load_news():
             Vedomosti(),
             Novaya()
         ]
-        now = datetime.datetime.now()
+        
         if not last_dt:
-            last_dt = now - datetime.timedelta(hours=config['HOURS_INIT'])
-        else:
-            last_dt = datetime.datetime.now() - datetime.timedelta(seconds=config['HOURS_INIT'])
+            last_dt = datetime.datetime.now() - datetime.timedelta(hours=config['HOURS_INIT'])
         for parser in parsers_:
             logger.info(parser.id + ' ' + str(last_dt))
             parser.parse(pool, until_time=last_dt)
-        last_dt = now
+            last_dt = min(last_dt, parser.max_ts)
 
         pool.close()
         pool.join()

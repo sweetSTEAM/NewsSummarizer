@@ -57,6 +57,7 @@ class BaseParser():
         if until_time:
             until_time = until_time.timestamp()
         self.curr_date = start_time
+        self.max_ts = self.curr_date
         url_counter = 0
         url_to_fetch = self._page_url()
         while True:
@@ -81,6 +82,7 @@ class BaseParser():
                     if news_params[1] > self.curr_date:
                         break
                     self.curr_date = news_params[1]
+                    self.max_ts = max(self.max_ts, self.curr_date)
                     if ((news_count is not None and url_counter >= news_count) or
                             (until_time is not None and self.curr_date <= until_time)):
                         break
@@ -97,7 +99,7 @@ class BaseParser():
                 url_to_fetch = self._next_page_url()
                 continue
             break
-            
+
         logger.info('End of parsing, time: {}'.format(
             time.strftime('%H:%M:%S', time.gmtime(time.time() - t_start))))
 
