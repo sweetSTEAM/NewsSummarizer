@@ -12,7 +12,7 @@ from networkx.exception import NetworkXError
 from .normalization import TEXT_PIPELINE
 
 
-def divrank(text, config={'summary_length': 5}):
+def divrank(text, config={'summary_length': 1}):
     '''
     Args:
       text: text to be summarized (unicode string)

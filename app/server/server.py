@@ -71,7 +71,4 @@ def reverse_filter(s):
 
 
 if __name__ == "__main__":
-    # while not db.events.count():
-    #     logger.info('Waiting for data... {}'.format(db.events.count()))
-    #     time.sleep(app.config['BOOTSTRAP_WAIT'])
     app.run(host='0.0.0.0', port=app.config['PORT'], threaded=True, use_reloader=False)

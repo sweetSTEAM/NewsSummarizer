@@ -4,7 +4,7 @@ from sumy.parsers.plaintext import PlaintextParser
 from .normalization import STOP_WORDS, stemmer
 
 
-def sum_basic(text, config={'summary_length': 5}):
+def sum_basic(text, config={'summary_length': 1}):
     summarizer = SumBasicSummarizer(stemmer.lemmatize)
     summarizer.stop_words = STOP_WORDS
     parser = PlaintextParser.from_string(text, Tokenizer('english'))
