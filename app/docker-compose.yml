@@ -42,6 +42,7 @@ services:
      - NUM_PROCESSES=8
     volumes:
      - large:/app
+    working_dir: /app
     networks:
      - db_net
     links:
@@ -55,4 +56,4 @@ volumes:
     driver: local-persist
     driver_opts:
       size: 50G
-      mountpoint: /
+      mountpoint: /data/local-persist/data
