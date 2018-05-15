@@ -32,7 +32,6 @@ if not len(logger.handlers):
 
 def load_news():
     db.raw_news.remove({})
-    db.events.remove({})
     last_dt = None
     while True:
         logger.info('iteration started')
@@ -48,6 +47,8 @@ def load_news():
         now = datetime.datetime.now()
         if not last_dt:
             last_dt = now - datetime.timedelta(hours=config['HOURS_INIT'])
+        else:
+            last_dt = datetime.datetime.now() - datetime.timedelta(seconds=config['HOURS_INIT'])
         for parser in parsers_:
             logger.info(parser.id + ' ' + str(last_dt))
             parser.parse(pool, until_time=last_dt)
