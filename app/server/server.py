@@ -47,7 +47,7 @@ def get_content(topic_count=5):
         return redirect(
             url_for('get_content', topic_count=len(events)))
     events_sliced = events[:topic_count]
-    count = sum(len(x['content'] for x in events))
+    count = sum(len(x['content']) for x in events)
     return render_template('main.html', groups_count=len(events),
                            count=count, groups=events_sliced)
 
