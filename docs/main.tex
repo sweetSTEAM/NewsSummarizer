@@ -434,14 +434,8 @@ while True:
             self.curr_date = news_params[1]
             if (self.curr_date <= until_time):
                 break
+            # Pushing task to pool queue
             pool.map_async(self._process_news, [(news_params)])
-            url_counter += 1
-            if url_counter % 10000 == 0:
-                logger .warning(
-                    '{} {} news put to queue'.format(self.id, url_counter))
-        except Exception as e:
-            logger.error(
-                'Error on url {}: {} '.format(url_to_fetch, traceback.format_exc()))
     else:
         url_to_fetch = self._next_page_url()
         continue
@@ -449,7 +443,7 @@ while True:
 . . .
 	\end{minted}
 	\caption{Часть метода \texttt{BaseParser.parse} с основной логикой.}
-	\label{getnews}
+	\label{parse}
 \end{figure}
 
 
