@@ -111,10 +111,10 @@ class Analyzer():
         config = self.config['kmeans']
         tfidf_matrix = self._data['tfidf_vector'].tolist()
         kmeans = MiniBatchKMeans(
-            n_clusters=self._count // config['n_clusters_coeff'],
-            batch_size=config['batch_size'],
-            n_init=config['n_init'],
-            max_iter=config['max_iter']
+            n_clusters=int(self._count // config['n_clusters_coeff']),
+            batch_size=int(config['batch_size']),
+            n_init=int(config['n_init']),
+            max_iter=int(config['max_iter'])
         ).fit(tfidf_matrix)
         clusters_raw = kmeans.predict(tfidf_matrix)
         clusters = [[] for _ in range(len(clusters_raw))]
