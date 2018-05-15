@@ -52,6 +52,6 @@ networks:
 
 volumes:
   large:
-    driver: local
+    driver: flocker
     driver_opts:
       size: 50G
