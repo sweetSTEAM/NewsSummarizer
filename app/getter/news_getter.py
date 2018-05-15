@@ -50,7 +50,13 @@ def load_news():
         for parser in parsers_:
             logger.info(parser.id + ' ' + str(last_dt))
             parser.parse(pool, until_time=last_dt)
+
+        last_dt = 10*9
+        for parser in parsers_:
             last_dt = min(last_dt, parser.max_ts)
+        
+        last_dt = datetime.datetime.utcfromtimestamp(last_dt).replace(
+            tzinfo=pytz.utc).astimezone(pytz.timezone('Europe/Moscow'))
 
         pool.close()
         pool.join()
