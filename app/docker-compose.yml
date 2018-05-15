@@ -55,3 +55,4 @@ volumes:
     driver: local-persist
     driver_opts:
       size: 50G
+      mountpoint: /
