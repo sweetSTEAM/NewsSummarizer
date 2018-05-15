@@ -52,5 +52,6 @@ networks:
 
 volumes:
   large:
+    driver: local-persist
     driver_opts:
       size: 50G
