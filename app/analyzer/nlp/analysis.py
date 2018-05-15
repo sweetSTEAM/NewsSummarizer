@@ -58,6 +58,8 @@ class Analyzer():
         self._data = pd.concat([new_data, self._data])
         # Sorting just to be sure
         self._data.sort_values('date', inplace=True, ascending=False)
+        if self.config['drop_duplicates']:
+            self._data.drop_duplicates(subset='url', inplace=True)
         # Saving most recent news date for next update
         self._last_time = self._data.iloc[0].date
         self._first_time = self._data.iloc[-1].date
@@ -84,8 +86,6 @@ class Analyzer():
         data = data[['media', 'url', 'title', 'text', 'topic', 'date']]
         data.date = data.date.apply(int)
         data.sort_values('date', inplace=True, ascending=False)
-        if self.config['drop_duplicates']:
-            data.drop_duplicates(subset='url', inplace=True)
         # Append text_norm, title_norm columns to data w/ normalized text
         data.title = data.title.apply(lambda x: x.strip())
         data['text_norm'] = data.text.apply(TEXT_PIPELINE)
