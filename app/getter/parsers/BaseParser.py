@@ -79,8 +79,8 @@ class BaseParser():
                     if not news_params:
                         continue
                     url = news_params[0]
-                    if news_params[1] > self.curr_date:
-                        break
+                    # if news_params[1] > self.curr_date:
+                    #     break
                     self.curr_date = news_params[1]
                     self.max_ts = max(self.max_ts, self.curr_date)
                     if ((news_count is not None and url_counter >= news_count) or

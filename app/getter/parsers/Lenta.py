@@ -60,8 +60,8 @@ class Lenta(BaseParser):
                     'topic': topic, 'date': date, 'other': {'tag': tag}}
         return news_out
 
-    def _time_to_str(self, time):
-        return datetime.datetime.utcfromtimestamp(time).replace(
+    def _time_to_str(self, time_):
+        return datetime.datetime.utcfromtimestamp(time_).replace(
             tzinfo=pytz.utc).astimezone(self.TZ).strftime('/%Y/%m/%d/')
 
     def _str_to_time(self, time_str):
