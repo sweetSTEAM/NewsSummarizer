@@ -46,5 +46,5 @@ stop-words==2015.2.23.1
 summpy==0.2.1
 sumy==0.7.0
 tempora==1.11
-urllib3==1.22
+urllib3==1.26.5
 Werkzeug==0.14.1
